@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import random
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -26,6 +27,7 @@ def save():
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
+    messagebox.askokcancel()
     with open("data.txt", "a") as f:
         f.write(f"{website} | {email} | {password}\n")
     website_entry.delete(0, END)
