@@ -27,11 +27,19 @@ def save():
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
-    messagebox.askokcancel()
-    with open("data.txt", "a") as f:
-        f.write(f"{website} | {email} | {password}\n")
-    website_entry.delete(0, END)
-    password_entry.delete(0, END)
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showinfo(message="Don't leave any info blank!")
+    else:
+        is_ok = messagebox.askokcancel(title=website, message=f"This is the info detail:\nEmail:{email}\nPassword:{password}\nIs it correct?")
+        if is_ok == True:
+            with open("data.txt", "a") as f:
+                f.write(f"{website} | {email} | {password}\n")
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+        else:
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
